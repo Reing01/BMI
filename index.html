@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de IMC</h1>
+        <div class="gender-selection">
+            <button class="gender-btn">Masculino</button>
+            <button class="gender-btn">Femenino</button>
+        </div>
+        <div class="input-group">
+            <label for="altura">Altura (cm)</label>
+            <input type="range" id="altura" min="100" max="220" value="170" step="1" oninput="alturaOutput.value = altura.value">
+            <output id="alturaOutput">170</output>
+        </div>
+        <div class="input-group">
+            <label for="peso">Peso (kg)</label>
+            <button class="adjust-btn" onclick="adjustValue('peso', -1)">-</button>
+            <input type="number" id="peso" value="60" min="1" max="200" step="1">
+            <button class="adjust-btn" onclick="adjustValue('peso', 1)">+</button>
+        </div>
+        <div class="input-group">
+            <label for="edad">Edad (años)</label>
+            <button class="adjust-btn" onclick="adjustValue('edad', -1)">-</button>
+            <input type="number" id="edad" value="25" min="1" max="120" step="1">
+            <button class="adjust-btn" onclick="adjustValue('edad', 1)">+</button>
+        </div>
+        <button class="calculate-btn" onclick="calcularIMC()">CALCULAR</button>
+    </div>
+    <script>
+        function adjustValue(id, delta) {
+            var input = document.getElementById(id);
+            var value = parseInt(input.value);
+            if (!isNaN(value)) {
+                input.value = value + delta;
+            }
+        }
+        
+        function calcularIMC() {
+            var altura = parseFloat(document.getElementById('altura').value) / 100;
+            var peso = parseFloat(document.getElementById('peso').value);
+            var imc = peso / (altura * altura);
+            alert('Tu IMC es: ' + imc.toFixed(2));
+        }
+    </script>
+</body>
+</html>
